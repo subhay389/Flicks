@@ -8,18 +8,18 @@ Time spent: **X** hours spent in total
 
 The following **required** functionality is complete:
 
-- [check] User can view a list of movies currently playing in theaters from The Movie Database.
-- [check] Poster images are loaded using the UIImageView category in the AFNetworking library.
-- [check] User sees a loading state while waiting for the movies API.
-- [check] User can pull to refresh the movie list.
+- [✓] User can view a list of movies currently playing in theaters from The Movie Database.
+- [✓] Poster images are loaded using the UIImageView category in the AFNetworking library.
+- [✓] User sees a loading state while waiting for the movies API.
+- [✓] User can pull to refresh the movie list.
 
 The following **optional** features are implemented:
 
-- [cross] User sees an error message when there's a networking error.
-- [cross] Movies are displayed using a CollectionView instead of a TableView.
-- [cross] User can search for a movie.
-- [cross] All images fade in as they are loading.
-- [cross] Customize the UI.
+- [X] User sees an error message when there's a networking error.
+- [X] Movies are displayed using a CollectionView instead of a TableView.
+- [X] User can search for a movie.
+- [X] All images fade in as they are loading.
+- [X] Customize the UI.
 
 The following **additional** features are implemented:
 
@@ -33,13 +33,13 @@ Please list two areas of the assignment you'd like to **discuss further with you
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='https://github.com/subhay389/Flicks/blob/master/Flicks.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
 
-Describe any challenges encountered while building the app.
+Some minor problem with pull to refresh as the code givin in the coursesite produced some errors. 
 
 ## License
 

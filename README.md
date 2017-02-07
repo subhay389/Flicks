@@ -43,7 +43,7 @@ Some minor problem with pull to refresh as the code givin in the coursesite prod
 
 ## License
 
-    Copyright [yyyy] [name of copyright owner]
+    Copyright [2017] [Subhay Manandhar]
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.

@@ -11,27 +11,29 @@ import AFNetworking
 import MBProgressHUD
 
 
-class MovieViewController: UIViewController, UITableViewDataSource, UITableViewDelegate{
+class MovieViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate{
 
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var searchBar: UISearchBar!
+    
     var movies: [NSDictionary]?
     
-
+    var filteredData: [NSDictionary]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.dataSource = self
+        tableView.delegate = self
+        searchBar.delegate = self
+
+        
         
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refreshControlAction(_:)), for: UIControlEvents.valueChanged)
 //        addTarget(self, action: #selector(refreshControlAction(_refreshControl:)), for: UIControlEvents.valueChanged)
         // add refresh control to table view
         tableView.insertSubview(refreshControl, at: 0)
-
-
-        
-        tableView.dataSource = self
-        tableView.delegate = self
 
         
         
@@ -47,11 +49,15 @@ class MovieViewController: UIViewController, UITableViewDataSource, UITableViewD
                    // print(dataDictionary)
                     MBProgressHUD.hide(for: self.view, animated: true)
                     self.movies  = dataDictionary["results"] as? [NSDictionary]
+                    self.filteredData = self.movies
                     self.tableView.reloadData()
+                    
                 }
             }
         }
         task.resume()
+        
+        //print(filteredData)
         
     }
     
@@ -64,8 +70,8 @@ class MovieViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if let movies = movies {
-                return movies.count
+        if let filteredData = filteredData {
+                return filteredData.count
         }else{
             return 0
         }
@@ -76,7 +82,7 @@ class MovieViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell", for: indexPath) as! MovieCell
         
-        let movie = movies![indexPath.row]
+        let movie = filteredData![indexPath.row]
         let title = movie["title"] as! String
         let overview = movie["overview"] as! String
         let posterPath = movie["poster_path"] as! String
@@ -108,12 +114,40 @@ class MovieViewController: UIViewController, UITableViewDataSource, UITableViewD
                     // print(dataDictionary)
                     MBProgressHUD.hide(for: self.view, animated: true)
                     self.movies  = dataDictionary["results"] as? [NSDictionary]
+                    self.filteredData = self.movies
                     self.tableView.reloadData()
-                    
                     refreshControl.endRefreshing()
                 }
             }
         }
         task.resume()
     }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        // When there is no text, filteredData is the same as the original data
+        // When user has entered text into the search box
+        // Use the filter method to iterate over all items in the data array
+        // For each item, return true if the item should be included and false if the
+        // item should NOT be included
+        filteredData = searchText.isEmpty ? movies : movies?.filter({(dataString: NSDictionary) -> Bool in
+            // If dataItem matches the searchText, return true to include it
+            let title = dataString["title"] as! String
+            return title.range(of: searchText, options: .caseInsensitive) != nil
+        })
+        
+        tableView.reloadData()
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        self.searchBar.showsCancelButton = true
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.showsCancelButton = false
+        searchBar.text = ""
+        filteredData = movies
+        searchBar.resignFirstResponder()
+        self.tableView.reloadData()
+    }
+
 }

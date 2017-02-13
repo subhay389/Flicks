@@ -15,6 +15,7 @@ class MovieViewController: UIViewController, UITableViewDataSource, UITableViewD
 
     @IBOutlet weak var tableView: UITableView!
     
+
     @IBOutlet weak var searchBar: UISearchBar!
     
     var movies: [NSDictionary]?
@@ -25,8 +26,9 @@ class MovieViewController: UIViewController, UITableViewDataSource, UITableViewD
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
-        searchBar.delegate = self
-
+        if searchBar != nil{
+            searchBar.delegate = self
+        }
         
         
         let refreshControl = UIRefreshControl()
@@ -35,9 +37,7 @@ class MovieViewController: UIViewController, UITableViewDataSource, UITableViewD
         // add refresh control to table view
         tableView.insertSubview(refreshControl, at: 0)
 
-        
-        
-        
+   
         let apiKey = "a07e22bc18f5cb106bfe4cc1f83ad8ed"
         let url = URL(string: "https://api.themoviedb.org/3/movie/now_playing?api_key=\(apiKey)")!
         let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
@@ -56,12 +56,8 @@ class MovieViewController: UIViewController, UITableViewDataSource, UITableViewD
             }
         }
         task.resume()
-        
-        //print(filteredData)
-        
     }
     
-
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -149,5 +145,19 @@ class MovieViewController: UIViewController, UITableViewDataSource, UITableViewD
         searchBar.resignFirstResponder()
         self.tableView.reloadData()
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let cell = sender as! UITableViewCell
+        let indexPath = tableView.indexPath(for: cell)
+        
+        let movie = movies?[indexPath!.row]
+        
+        let detailViewController = segue.destination as! DetailViewController
+        
+        detailViewController.current_movie = movie!
+
+        
+    }
+
 
 }

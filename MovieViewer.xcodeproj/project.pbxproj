@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		26A1CC3566FA11E9B1F7CAE6 /* Pods_MovieViewer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D9AD72EEA05E03BC98DF455 /* Pods_MovieViewer.framework */; };
+		2746830A1E4AA418008B6A5A /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274683091E4AA418008B6A5A /* DetailViewController.swift */; };
 		279742D61E47E88E008A00F8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279742D51E47E88E008A00F8 /* AppDelegate.swift */; };
 		279742DB1E47E88E008A00F8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 279742D91E47E88E008A00F8 /* Main.storyboard */; };
 		279742DD1E47E88E008A00F8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 279742DC1E47E88E008A00F8 /* Assets.xcassets */; };
@@ -18,6 +19,7 @@
 
 /* Begin PBXFileReference section */
 		1DA36E72CBF70934E81446B3 /* Pods-MovieViewer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieViewer.release.xcconfig"; path = "Pods/Target Support Files/Pods-MovieViewer/Pods-MovieViewer.release.xcconfig"; sourceTree = "<group>"; };
+		274683091E4AA418008B6A5A /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		279742D21E47E88E008A00F8 /* MovieViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		279742D51E47E88E008A00F8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		279742DA1E47E88E008A00F8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 			isa = PBXGroup;
 			children = (
 				279742E71E47E8CD008A00F8 /* MovieViewController.swift */,
+				274683091E4AA418008B6A5A /* DetailViewController.swift */,
 			);
 			name = "View Controller";
 			sourceTree = "<group>";
@@ -234,6 +237,7 @@
 				279742D61E47E88E008A00F8 /* AppDelegate.swift in Sources */,
 				279742E81E47E8CD008A00F8 /* MovieViewController.swift in Sources */,
 				279742EC1E4809BE008A00F8 /* MovieCell.swift in Sources */,
+				2746830A1E4AA418008B6A5A /* DetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -399,6 +403,7 @@
 				279742E61E47E88E008A00F8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

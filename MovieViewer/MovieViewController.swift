@@ -77,21 +77,21 @@ class MovieViewController: UIViewController, UITableViewDataSource, UITableViewD
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell", for: indexPath) as! MovieCell
-        
+        let baseURL = "http://image.tmdb.org/t/p/w500"
+
         let movie = filteredData![indexPath.row]
         let title = movie["title"] as! String
         let overview = movie["overview"] as! String
-        let posterPath = movie["poster_path"] as! String
-        
-        
-        let baseURL = "http://image.tmdb.org/t/p/w500"
-        let imageURL = NSURL(string: baseURL + posterPath)
-        
-        
         cell.titleLabel.text = title
         cell.overviewLabel.text = overview
-        cell.posterView.setImageWith(imageURL as! URL)
         
+        if let posterPath = movie["poster_path"] as? String{
+            let imageURL = NSURL(string: baseURL + posterPath)
+            cell.posterView.setImageWith(imageURL as! URL)
+        }
+        
+
+
         //print("row \(indexPath.row)")
         return cell
         

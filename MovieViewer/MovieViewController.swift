@@ -166,9 +166,7 @@ class MovieViewController: UIViewController, UITableViewDataSource, UITableViewD
         cell.selectedBackgroundView = backgroundView
         
         let indexPath = tableView.indexPath(for: cell)
-        
         let movie = movies?[indexPath!.row]
-        
         let detailViewController = segue.destination as! DetailViewController
         
         detailViewController.current_movie = movie!

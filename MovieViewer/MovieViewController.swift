@@ -22,6 +22,8 @@ class MovieViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     var filteredData: [NSDictionary]?
     
+    var endpoint: String!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
@@ -41,7 +43,9 @@ class MovieViewController: UIViewController, UITableViewDataSource, UITableViewD
 
    
         let apiKey = "a07e22bc18f5cb106bfe4cc1f83ad8ed"
-        let url = URL(string: "https://api.themoviedb.org/3/movie/now_playing?api_key=\(apiKey)")!
+        if let ep = endpoint{
+            let url = URL(string: "https://api.themoviedb.org/3/movie/\(ep)?api_key=\(apiKey)")!
+
         let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
         let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
         MBProgressHUD.showAdded(to: self.view, animated: true)
@@ -57,7 +61,9 @@ class MovieViewController: UIViewController, UITableViewDataSource, UITableViewD
                 }
             }
         }
+            
         task.resume()
+        }
     }
     
 
@@ -93,7 +99,8 @@ class MovieViewController: UIViewController, UITableViewDataSource, UITableViewD
         }
         
 
-
+        
+        
         //print("row \(indexPath.row)")
         return cell
         
@@ -102,7 +109,8 @@ class MovieViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     func refreshControlAction(_ refreshControl: UIRefreshControl) {
         let apiKey = "a07e22bc18f5cb106bfe4cc1f83ad8ed"
-        let url = URL(string: "https://api.themoviedb.org/3/movie/now_playing?api_key=\(apiKey)")!
+        if let ep = endpoint{
+        let url = URL(string: "https://api.themoviedb.org/3/movie/\(ep)?api_key=\(apiKey)")!
         let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
         let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
         MBProgressHUD.showAdded(to: self.view, animated: true)
@@ -119,6 +127,7 @@ class MovieViewController: UIViewController, UITableViewDataSource, UITableViewD
             }
         }
         task.resume()
+        }
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -150,6 +159,12 @@ class MovieViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let cell = sender as! UITableViewCell
+        
+        cell.selectionStyle = .none
+        let backgroundView = UIView()
+        backgroundView.backgroundColor = UIColor.red
+        cell.selectedBackgroundView = backgroundView
+        
         let indexPath = tableView.indexPath(for: cell)
         
         let movie = movies?[indexPath!.row]
@@ -159,6 +174,10 @@ class MovieViewController: UIViewController, UITableViewDataSource, UITableViewD
         detailViewController.current_movie = movie!
 
         
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 
 

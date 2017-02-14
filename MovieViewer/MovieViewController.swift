@@ -35,7 +35,9 @@ class MovieViewController: UIViewController, UITableViewDataSource, UITableViewD
         refreshControl.addTarget(self, action: #selector(refreshControlAction(_:)), for: UIControlEvents.valueChanged)
 //        addTarget(self, action: #selector(refreshControlAction(_refreshControl:)), for: UIControlEvents.valueChanged)
         // add refresh control to table view
+        refreshControl.backgroundColor = UIColor.gray
         tableView.insertSubview(refreshControl, at: 0)
+        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
 
    
         let apiKey = "a07e22bc18f5cb106bfe4cc1f83ad8ed"

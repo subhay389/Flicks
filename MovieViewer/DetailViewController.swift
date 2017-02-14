@@ -9,6 +9,7 @@
 import UIKit
 
 class DetailViewController: UIViewController {
+    @IBOutlet weak var scrollView: UIScrollView!
 
     @IBOutlet weak var posterImageView: UIImageView!
     
@@ -16,10 +17,13 @@ class DetailViewController: UIViewController {
     
     @IBOutlet weak var overviewLabel: UILabel!
     
+    @IBOutlet weak var infoView: UIView!
     var current_movie: NSDictionary = [:]
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        scrollView.contentSize = CGSize(width: scrollView.frame.size.width, height: infoView.frame.origin.y + infoView.frame.size.height)
         
         print(current_movie)
         let title = current_movie["title"] as! String
@@ -34,6 +38,8 @@ class DetailViewController: UIViewController {
         
         titleLabel.text = title
         overviewLabel.text = overview
+        overviewLabel.sizeToFit()
+        
         
 
 
